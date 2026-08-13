@@ -13,17 +13,21 @@
         header .logo span { color: #d97706; }
         header .tagline { font-size: 12px; color: #9ca3af; letter-spacing: 1px; text-transform: uppercase; }
         .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
+        .section-title { font-size: 20px; font-weight: 700; color: #f59e0b; margin: 35px 0 15px 0; border-left: 4px solid #f59e0b; padding-left: 10px; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         .card { background: #131924; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-6px); border-color: rgba(217, 119, 6, 0.4); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
-        .image-box { position: relative; width: 100%; height: 340px; overflow: hidden; }
+        .image-box { position: relative; width: 100%; height: 320px; overflow: hidden; background: #1a2232; }
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .card:hover .image-box img { transform: scale(1.04); }
         .discount-badge { position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); color: #fbbf24; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
-        .card-body { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .card-body h3 { font-size: 18px; font-weight: 600; color: #f9fafb; margin-bottom: 6px; }
-        .card-body p { font-size: 13px; color: #9ca3af; margin-bottom: 18px; line-height: 1.4; }
-        .btn-buy { background: #fff; color: #0b0f17; border: none; padding: 13px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; font-size: 14px; transition: all 0.2s; }
+        .card-body { padding: 18px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-body h3 { font-size: 16px; font-weight: 600; color: #f9fafb; margin-bottom: 6px; }
+        .card-body p { font-size: 13px; color: #9ca3af; margin-bottom: 12px; line-height: 1.4; }
+        .price-container { display: flex; align-items: center; gap: 8px; margin-bottom: 15px; }
+        .price-container .selling-price { font-size: 18px; font-weight: 700; color: #38bdf8; }
+        .price-container .mrp { font-size: 13px; color: #64748b; text-decoration: line-through; }
+        .btn-buy { background: #fff; color: #0b0f17; border: none; padding: 12px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; font-size: 14px; transition: all 0.2s; }
         .btn-buy:hover { background: #f59e0b; color: #fff; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
         .modal-content { background: #131924; padding: 28px; border-radius: 20px; width: 100%; max-width: 380px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
@@ -44,6 +48,7 @@
 </header>
 
 <div class="container">
+    <!-- Main Categories -->
     <div class="grid">
         <div class="card">
             <div class="image-box">
@@ -77,15 +82,84 @@
                 <button class="btn-buy" onclick="openModal('Boy Accessories', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600')">Explore & Order</button>
             </div>
         </div>
+    </div>
 
+    <!-- Girl's Accessories Products Section -->
+    <h2 class="section-title">Girl's Accessories Collection</h2>
+    <div class="grid">
+        <!-- Product 1 -->
         <div class="card">
             <div class="image-box">
-                <span class="discount-badge">UP TO 65% OFF</span>
-                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Women Accessories">
+                <span class="discount-badge">57% OFF</span>
+                <img src="https://images.meesho.com/images/products/170309528/1_512.webp" alt="Korean Gold Bow Necklace">
             </div>
             <div class="card-body">
-                <div><h3>Girl's Accessories</h3><p>Aesthetic jewellery, watches & luxury bags.</p></div>
-                <button class="btn-buy" onclick="openModal('Girl Accessories', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600')">Explore & Order</button>
+                <div>
+                    <h3>Korean Gold Bow Necklace</h3>
+                    <p>Aesthetic gold-plated bow pendant with beaded chain accent.</p>
+                </div>
+                <div class="price-container">
+                    <span class="selling-price">₹299</span>
+                    <span class="mrp">₹699</span>
+                </div>
+                <button class="btn-buy" onclick="openModal('Korean Gold Bow Necklace (₹299)', 'https://images.meesho.com/images/products/170309528/1_512.webp')">Order Now</button>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="card">
+            <div class="image-box">
+                <span class="discount-badge">58% OFF</span>
+                <img src="https://images.meesho.com/images/products/92710636/1_512.webp" alt="10 Pcs Aesthetic Ring Set">
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>10 Pcs Aesthetic Ring Set</h3>
+                    <p>Korean gold-plated stackable ring combo with pearl details.</p>
+                </div>
+                <div class="price-container">
+                    <span class="selling-price">₹249</span>
+                    <span class="mrp">₹599</span>
+                </div>
+                <button class="btn-buy" onclick="openModal('10 Pcs Aesthetic Ring Set (₹249)', 'https://images.meesho.com/images/products/92710636/1_512.webp')">Order Now</button>
+            </div>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="card">
+            <div class="image-box">
+                <span class="discount-badge">60% OFF</span>
+                <img src="https://images.meesho.com/images/products/60302628/1_512.webp" alt="Pack of 6 Pastel Clips">
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Pack of 6 Pastel Flower Clips</h3>
+                    <p>Non-slip matte finish flower claw clips in pastel shades.</p>
+                </div>
+                <div class="price-container">
+                    <span class="selling-price">₹199</span>
+                    <span class="mrp">₹499</span>
+                </div>
+                <button class="btn-buy" onclick="openModal('Pack of 6 Pastel Flower Clips (₹199)', 'https://images.meesho.com/images/products/60302628/1_512.webp')">Order Now</button>
+            </div>
+        </div>
+
+        <!-- Product 4 -->
+        <div class="card">
+            <div class="image-box">
+                <span class="discount-badge">50% OFF</span>
+                <img src="https://images.meesho.com/images/products/331320845/1_512.webp" alt="Rose Gold Watch & Ring Set">
+            </div>
+            <div class="card-body">
+                <div>
+                    <h3>Rose Gold Watch & Ring Set</h3>
+                    <p>Trendy analog watch with matching ring & earrings gift combo.</p>
+                </div>
+                <div class="price-container">
+                    <span class="selling-price">₹499</span>
+                    <span class="mrp">₹999</span>
+                </div>
+                <button class="btn-buy" onclick="openModal('Rose Gold Watch & Ring Set (₹499)', 'https://images.meesho.com/images/products/331320845/1_512.webp')">Order Now</button>
             </div>
         </div>
     </div>
@@ -135,8 +209,8 @@ function submitToWhatsApp() {
 
     const message =
         `*NEW ORDER INQUIRY*\n\n` +
-        `*Category:* ${cat}\n` +
-        `*Requirement:* ${item}\n` +
+        `*Category / Item:* ${cat}\n` +
+        `*Requirement Note:* ${item}\n` +
         `*Product Photo:* ${imgUrl}\n\n` +
         `*Customer Info:*\n` +
         `• *Name:* ${name}\n` +
