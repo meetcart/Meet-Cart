@@ -5,34 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Men's Collection - MeetCart</title>
   <style>
-    body { font-family: sans-serif; background: #0b0f17; color: white; padding: 20px; text-align: center; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px; }
-    .card { background: #131924; border-radius: 10px; padding: 15px; border: 1px solid #1f2937; }
-    .card img { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; }
-    .btn { display: inline-block; margin-top: 10px; padding: 8px 15px; background: #9f7706; color: white; text-decoration: none; border-radius: 5px; }
-    .back-btn { display: inline-block; margin-bottom: 20px; color: #9f7706; text-decoration: none; font-weight: bold; }
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+    body { background: #0b0f17; color: #f3f4f6; padding: 20px; text-align: center; }
+
+    .header-nav { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto 20px; }
+    .back-btn { color: #f59e0b; text-decoration: none; font-weight: 600; font-size: 14px; }
+    h1 { font-size: 24px; color: #fff; }
+
+    /* Product Grid */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
+    .card { background: #131924; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: 0.3s ease; text-align: left; }
+    .card:hover { transform: translateY(-5px); border-color: #f59e0b; }
+    .card img { width: 100%; height: 260px; object-fit: cover; }
+    .card-info { padding: 15px; }
+    .card-info h3 { font-size: 16px; margin-bottom: 6px; color: #fff; }
+    .card-info .price { color: #f59e0b; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
+    .btn-view { display: block; text-align: center; background: rgba(255,255,255,0.08); color: #fff; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: 600; }
+
+    /* Product Details Popup Modal */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
+    .modal-content { background: #131924; border-radius: 18px; max-width: 400px; width: 100%; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
+    .close-btn { position: absolute; top: 12px; right: 15px; font-size: 24px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.5); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .modal-img { width: 100%; height: 280px; object-fit: cover; }
+    .modal-body { padding: 20px; }
+    .modal-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .modal-price { font-size: 18px; color: #f59e0b; font-weight: 700; margin-bottom: 12px; }
+    .modal-desc { font-size: 13px; color: #9ca3af; line-height: 1.5; margin-bottom: 20px; }
+    .btn-order { display: block; width: 100%; padding: 14px; background: #22c55e; color: #fff; text-align: center; text-decoration: none; font-weight: 700; border-radius: 10px; font-size: 15px; }
+    .btn-order:hover { background: #16a34a; }
   </style>
 </head>
 <body>
 
-  <a href="index.html" class="back-btn">← Back to Home</a>
-  <h1>Men's Collection</h1>
+  <div class="header-nav">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <h1>Men's Collection</h1>
+    <div style="width: 80px;"></div>
+  </div>
 
+  <!-- PRODUCTS LIST -->
   <div class="grid">
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?auto=format&fit=crop&w=600&q=80" alt="Suit">
-      <h3>Formal Men Suit</h3>
-      <p>₹2,999</p>
-      <a href="#" class="btn">Buy Now</a>
+
+    <!-- Item 1 -->
+    <div class="card" onclick="openProduct('Royal Navy Blue Suit', '₹2,999', 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600', 'Premium 3-piece formal suit crafted with breathable fabric. Perfect for weddings, parties, and corporate events. Available in M, L, XL sizes.')">
+      <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600" alt="Suit">
+      <div class="card-info">
+        <h3>Royal Navy Blue Suit</h3>
+        <div class="price">₹2,999</div>
+        <span class="btn-view">View Details & Buy</span>
+      </div>
     </div>
 
-    <div class="card">
-      <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?auto=format&fit=crop&w=600&q=80" alt="Casual">
-      <h3>Casual Jacket & Shirt</h3>
-      <p>₹1,499</p>
-      <a href="#" class="btn">Buy Now</a>
+    <!-- Item 2 -->
+    <div class="card" onclick="openProduct('Casual Streetwear Jacket', '₹1,499', 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600', 'Trendy slim-fit blazer combo. High quality cotton-blend material, super comfortable for daily & party wear.')">
+      <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600" alt="Jacket">
+      <div class="card-info">
+        <h3>Casual Streetwear Jacket</h3>
+        <div class="price">₹1,499</div>
+        <span class="btn-view">View Details & Buy</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- PRODUCT POPUP MODAL -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <div class="close-btn" onclick="closeProduct()">&times;</div>
+      <img id="mImg" class="modal-img" src="" alt="Product">
+      <div class="modal-body">
+        <h2 id="mTitle" class="modal-title"></h2>
+        <div id="mPrice" class="modal-price"></div>
+        <p id="mDesc" class="modal-desc"></p>
+        <a id="mOrderBtn" href="#" target="_blank" class="btn-order">Order on WhatsApp</a>
+      </div>
     </div>
   </div>
 
+  <script>
+    const whatsappNum = "919251221747"; // Aapka WhatsApp Number
+
+    function openProduct(title, price, img, desc) {
+      document.getElementById('mTitle').innerText = title;
+      document.getElementById('mPrice').innerText = price;
+      document.getElementById('mImg').src = img;
+      document.getElementById('mDesc').innerText = desc;
+
+      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A*Photo:* ${img}%0A%0APlease share details for confirmation.`;
+      document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
+
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeProduct() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
