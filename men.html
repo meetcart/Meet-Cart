@@ -31,7 +31,7 @@
     .modal-body { padding: 20px; }
     .modal-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .modal-price { font-size: 18px; color: #f59e0b; font-weight: 700; margin-bottom: 12px; }
-    .modal-desc { font-size: 13px; color: #9ca3af; line-height: 1.5; margin-bottom: 20px; }
+    .modal-desc { font-size: 13px; color: #9ca3af; line-height: 1.6; margin-bottom: 20px; white-space: pre-line; }
     .btn-order { display: block; width: 100%; padding: 14px; background: #22c55e; color: #fff; text-align: center; text-decoration: none; font-weight: 700; border-radius: 10px; font-size: 15px; }
     .btn-order:hover { background: #16a34a; }
   </style>
@@ -47,7 +47,17 @@
   <!-- PRODUCTS LIST -->
   <div class="grid">
 
-    <!-- Item 1 -->
+    <!-- Item 1: New Popcorn Shirt -->
+    <div class="card" onclick="openProduct('Premium Popcorn Casual Shirt', '₹239 onwards', 'https://kommodo.ai/i/0JvYri68NnxQnkJWUSlh', '• Fabric: Imported Popcorn Knit (Wrinkle-Free)\n• Color: Mint Green\n• Style: Regular Casual Wear\n\n📌 Size & Price:\n• XXS - ₹239\n• M - ₹269\n• S - ₹289\n• L - ₹315\n• XL - ₹315\n• XXL - ₹315')">
+      <img src="https://kommodo.ai/i/0JvYri68NnxQnkJWUSlh" alt="Popcorn Shirt">
+      <div class="card-info">
+        <h3>Premium Popcorn Casual Shirt</h3>
+        <div class="price">₹239 onwards</div>
+        <span class="btn-view">View Details & Order</span>
+      </div>
+    </div>
+
+    <!-- Item 2: Royal Navy Blue Suit -->
     <div class="card" onclick="openProduct('Royal Navy Blue Suit', '₹2,999', 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600', 'Premium 3-piece formal suit crafted with breathable fabric. Perfect for weddings, parties, and corporate events. Available in M, L, XL sizes.')">
       <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600" alt="Suit">
       <div class="card-info">
@@ -57,7 +67,7 @@
       </div>
     </div>
 
-    <!-- Item 2 -->
+    <!-- Item 3: Casual Streetwear Jacket -->
     <div class="card" onclick="openProduct('Casual Streetwear Jacket', '₹1,499', 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600', 'Trendy slim-fit blazer combo. High quality cotton-blend material, super comfortable for daily & party wear.')">
       <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600" alt="Jacket">
       <div class="card-info">
@@ -92,7 +102,7 @@
       document.getElementById('mImg').src = img;
       document.getElementById('mDesc').innerText = desc;
 
-      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A*Photo:* ${img}%0A%0APlease share details for confirmation.`;
+      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A*Photo:* ${img}%0A%0A*Details:*%0A${desc}%0A%0APlease share details for confirmation.`;
       document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
 
       document.getElementById('productModal').style.display = 'flex';
