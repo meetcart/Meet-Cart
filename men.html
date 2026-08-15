@@ -17,7 +17,7 @@
     .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto; }
     .card { background: #131924; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; transition: 0.3s ease; text-align: left; }
     .card:hover { transform: translateY(-5px); border-color: #f59e0b; }
-    .card img { width: 100%; height: 260px; object-fit: cover; }
+    .card img { width: 100%; height: 260px; object-fit: cover; display: block; }
     .card-info { padding: 15px; }
     .card-info h3 { font-size: 16px; margin-bottom: 6px; color: #fff; }
     .card-info .price { color: #f59e0b; font-weight: 700; font-size: 15px; margin-bottom: 10px; }
@@ -26,12 +26,12 @@
     /* Product Details Popup Modal */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
     .modal-content { background: #131924; border-radius: 18px; max-width: 400px; width: 100%; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
-    .close-btn { position: absolute; top: 12px; right: 15px; font-size: 24px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.5); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
-    .modal-img { width: 100%; height: 280px; object-fit: cover; }
+    .close-btn { position: absolute; top: 12px; right: 15px; font-size: 24px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
+    .modal-img { width: 100%; height: 300px; object-fit: cover; display: block; background: #0b0f17; }
     .modal-body { padding: 20px; }
     .modal-title { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
     .modal-price { font-size: 18px; color: #f59e0b; font-weight: 700; margin-bottom: 12px; }
-    .modal-desc { font-size: 13px; color: #9ca3af; line-height: 1.6; margin-bottom: 20px; white-space: pre-line; }
+    .modal-desc { font-size: 13px; color: #9ca3af; line-height: 1.6; margin-bottom: 20px; }
     .btn-order { display: block; width: 100%; padding: 14px; background: #22c55e; color: #fff; text-align: center; text-decoration: none; font-weight: 700; border-radius: 10px; font-size: 15px; }
     .btn-order:hover { background: #16a34a; }
   </style>
@@ -47,8 +47,8 @@
   <!-- PRODUCTS LIST -->
   <div class="grid">
 
-    <!-- Item 1: Popcorn Shirt (With Your Local Image) -->
-    <div class="card" onclick="openProduct('Premium Popcorn Casual Shirt', '₹239 onwards', 'IMG_20260815_051821.png', '• Fabric: Imported Popcorn Knit (Wrinkle-Free)\n• Color: Mint Green\n• Style: Regular Casual Wear\n\n📌 Size & Price:\n• XXS - ₹239\n• M - ₹269\n• S - ₹289\n• L - ₹315\n• XL - ₹315\n• XXL - ₹315')">
+    <!-- Item 1: Popcorn Shirt -->
+    <div class="card" onclick="openProduct(1)">
       <img src="IMG_20260815_051821.jpg" alt="Popcorn Shirt">
       <div class="card-info">
         <h3>Premium Popcorn Casual Shirt</h3>
@@ -58,7 +58,7 @@
     </div>
 
     <!-- Item 2: Royal Navy Blue Suit -->
-    <div class="card" onclick="openProduct('Royal Navy Blue Suit', '₹2,999', 'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600', 'Premium 3-piece formal suit crafted with breathable fabric. Perfect for weddings, parties, and corporate events. Available in M, L, XL sizes.')">
+    <div class="card" onclick="openProduct(2)">
       <img src="https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600" alt="Suit">
       <div class="card-info">
         <h3>Royal Navy Blue Suit</h3>
@@ -68,7 +68,7 @@
     </div>
 
     <!-- Item 3: Casual Streetwear Jacket -->
-    <div class="card" onclick="openProduct('Casual Streetwear Jacket', '₹1,499', 'https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600', 'Trendy slim-fit blazer combo. High quality cotton-blend material, super comfortable for daily & party wear.')">
+    <div class="card" onclick="openProduct(3)">
       <img src="https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600" alt="Jacket">
       <div class="card-info">
         <h3>Casual Streetwear Jacket</h3>
@@ -87,7 +87,7 @@
       <div class="modal-body">
         <h2 id="mTitle" class="modal-title"></h2>
         <div id="mPrice" class="modal-price"></div>
-        <p id="mDesc" class="modal-desc"></p>
+        <div id="mDesc" class="modal-desc"></div>
         <a id="mOrderBtn" href="#" target="_blank" class="btn-order">Order on WhatsApp</a>
       </div>
     </div>
@@ -96,15 +96,40 @@
   <script>
     const whatsappNum = "919251221747";
 
-    function openProduct(title, price, img, desc) {
-      document.getElementById('mTitle').innerText = title;
-      document.getElementById('mPrice').innerText = price;
-      document.getElementById('mImg').src = img;
-      document.getElementById('mDesc').innerText = desc;
+    const products = {
+      1: {
+        title: "Premium Popcorn Casual Shirt",
+        price: "₹239 onwards",
+        img: "IMG_20260815_051821.jpg",
+        desc: "• Fabric: Imported Popcorn Knit (Wrinkle-Free)<br>• Color: Mint Green<br>• Style: Regular Casual Wear<br><br><b>📌 Size & Price:</b><br>• XXS - ₹239<br>• M - ₹269<br>• S - ₹289<br>• L - ₹315<br>• XL - ₹315<br>• XXL - ₹315"
+      },
+      2: {
+        title: "Royal Navy Blue Suit",
+        price: "₹2,999",
+        img: "https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600",
+        desc: "Premium 3-piece formal suit crafted with breathable fabric. Perfect for weddings, parties, and corporate events. Available in M, L, XL sizes."
+      },
+      3: {
+        title: "Casual Streetwear Jacket",
+        price: "₹1,499",
+        img: "https://images.unsplash.com/photo-1617137984095-74e4e5e3613f?w=600",
+        desc: "Trendy slim-fit blazer combo. High quality cotton-blend material, super comfortable for daily & party wear."
+      }
+    };
 
-      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A%0A*Details:*%0A${desc}%0A%0APlease share details for confirmation.`;
-      document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
+    function openProduct(id) {
+      const p = products[id];
+      if (!p) return;
 
+      document.getElementById('mTitle').innerText = p.title;
+      document.getElementById('mPrice').innerText = p.price;
+      document.getElementById('mImg').src = p.img;
+      document.getElementById('mDesc').innerHTML = p.desc;
+
+      const plainDesc = p.desc.replace(/<br>/g, "\n").replace(/<\/?[^>]+(>|$)/g, "");
+      const msg = `Hi! I want to order this product:\n\n*Item:* ${p.title}\n*Price:* ${p.price}\n\n*Details:*\n${plainDesc}\n\nPlease confirm availability.`;
+      
+      document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`;
       document.getElementById('productModal').style.display = 'flex';
     }
 
