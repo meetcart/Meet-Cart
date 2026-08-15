@@ -47,9 +47,9 @@
   <!-- PRODUCTS LIST -->
   <div class="grid">
 
-    <!-- Item 1: New Popcorn Shirt -->
-    <div class="card" onclick="openProduct('Premium Popcorn Casual Shirt', '₹239 onwards', 'https://kommodo.ai/i/0JvYri68NnxQnkJWUSlh', '• Fabric: Imported Popcorn Knit (Wrinkle-Free)\n• Color: Mint Green\n• Style: Regular Casual Wear\n\n📌 Size & Price:\n• XXS - ₹239\n• M - ₹269\n• S - ₹289\n• L - ₹315\n• XL - ₹315\n• XXL - ₹315')">
-      <img src="https://kommodo.ai/i/0JvYri68NnxQnkJWUSlh" alt="Popcorn Shirt">
+    <!-- Item 1: Popcorn Shirt (With Your Local Image) -->
+    <div class="card" onclick="openProduct('Premium Popcorn Casual Shirt', '₹239 onwards', 'IMG_20260815_051821.png', '• Fabric: Imported Popcorn Knit (Wrinkle-Free)\n• Color: Mint Green\n• Style: Regular Casual Wear\n\n📌 Size & Price:\n• XXS - ₹239\n• M - ₹269\n• S - ₹289\n• L - ₹315\n• XL - ₹315\n• XXL - ₹315')">
+      <img src="IMG_20260815_051821.png" alt="Popcorn Shirt">
       <div class="card-info">
         <h3>Premium Popcorn Casual Shirt</h3>
         <div class="price">₹239 onwards</div>
@@ -94,7 +94,7 @@
   </div>
 
   <script>
-    const whatsappNum = "919251221747"; // Aapka WhatsApp Number
+    const whatsappNum = "919251221747";
 
     function openProduct(title, price, img, desc) {
       document.getElementById('mTitle').innerText = title;
@@ -102,7 +102,7 @@
       document.getElementById('mImg').src = img;
       document.getElementById('mDesc').innerText = desc;
 
-      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A*Photo:* ${img}%0A%0A*Details:*%0A${desc}%0A%0APlease share details for confirmation.`;
+      const msg = `Hi! I want to order this product:%0A%0A*Item:* ${title}%0A*Price:* ${price}%0A%0A*Details:*%0A${desc}%0A%0APlease share details for confirmation.`;
       document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(decodeURIComponent(msg))}`;
 
       document.getElementById('productModal').style.display = 'flex';
