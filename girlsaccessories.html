@@ -13,7 +13,6 @@
     .back-btn { color: #f59e0b; text-decoration: none; font-weight: 600; font-size: 13px; }
     h1 { font-size: 20px; color: #fff; }
 
-    /* Grid */
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: 0 auto; }
     .card { background: #131924; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
     .card img { width: 100%; height: 180px; object-fit: cover; display: block; }
@@ -22,7 +21,6 @@
     .card-info .price { color: #f59e0b; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
     .btn-view { display: block; text-align: center; background: rgba(255,255,255,0.06); color: #fff; padding: 6px 4px; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
-    /* Modal */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
     .modal-content { background: #131924; border-radius: 16px; max-width: 380px; width: 100%; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
     .close-btn { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
@@ -42,15 +40,7 @@
     <div style="width: 60px;"></div>
   </div>
 
-  <div class="grid">
-    <div class="card" onclick="openProduct(1)">
-      <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Necklace">
-      <div class="card-info">
-        <h3>Elegant Gold Necklace</h3>
-        <div class="price">₹499</div>
-        <span class="btn-view">View Details</span>
-      </div>
-    </div>
+  <div class="grid" id="productGrid"></div>
 
   <div class="modal" id="productModal">
     <div class="modal-content">
@@ -67,22 +57,45 @@
 
   <script>
     const whatsappNum = "919251221747";
+    
     const products = {
-      1: { title: "Elegant Gold Necklace", price: "₹499", img: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600", desc: "Premium quality gold plated necklace. Perfect for parties and weddings." },
-      2: { title: "Classic Luxury Handbag", price: "₹899", img: "https://images.unsplash.com/photo-1591561954410-e01861788294?w=600", desc: "Trendy and spacious handbag for daily use. High quality faux leather." }
+      1: { 
+        title: "Combo of 12 Pair Earrings with Velvet Box", 
+        price: "₹673", 
+        img: "https://i.ibb.co/Vw3Lq0F/1000458435.jpg", // Yahan apna Direct Link daalna!
+        desc: "• Type: Jhumkhas (12 Pair Combo)<br>• Trend: Floral, Oxidised Silver<br>• Material: Alloy with Artificial Stones & Beads<br>• Occasion: Ethnic Party Wear<br>• Includes: Velvet Earrings Folding Box" 
+      }
     };
+
+    function renderProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = '';
+      for (let id in products) {
+        grid.innerHTML += `<div class="card" onclick="openProduct(${id})">
+          <img src="${products[id].img}" alt="${products[id].title}">
+          <div class="card-info">
+            <h3>${products[id].title}</h3>
+            <div class="price">${products[id].price}</div>
+            <span class="btn-view">View Details</span>
+          </div>
+        </div>`;
+      }
+    }
+
     function openProduct(id) {
       const p = products[id];
       document.getElementById('mTitle').innerText = p.title;
       document.getElementById('mPrice').innerText = p.price;
       document.getElementById('mImg').src = p.img;
       document.getElementById('mDesc').innerHTML = p.desc;
-      const msg = `Hi! I want to order: ${p.title} (${p.price}). Please confirm.`;
+      
+      const msg = `Hi! I want to order: ${p.title} (${p.price}). Please confirm availability.`;
       document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`;
       document.getElementById('productModal').style.display = 'flex';
     }
+
     function closeProduct() { document.getElementById('productModal').style.display = 'none'; }
+    renderProducts();
   </script>
 </body>
 </html>
-
