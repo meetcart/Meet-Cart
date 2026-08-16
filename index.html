@@ -12,18 +12,18 @@
         header .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
         header .logo span { color: #d97706; }
         header .tagline { font-size: 12px; color: #9ca3af; letter-spacing: 1px; text-transform: uppercase; }
-        .container { max-width: 1200px; margin: 25px auto; padding: 0 15px; }
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 12px; }
         .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .card { background: #131924; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; }
         .card:hover { transform: translateY(-6px); border-color: rgba(217, 119, 6, 0.4); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
-        .image-box { position: relative; width: 100%; height: 340px; overflow: hidden; }
+        .image-box { position: relative; width: 100%; height: 200px; overflow: hidden; }
         .image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .card:hover .image-box img { transform: scale(1.04); }
-        .discount-badge { position: absolute; top: 12px; right: 12px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); color: #fbbf24; font-size: 11px; font-weight: 700; padding: 6px 12px; border-radius: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
-        .card-body { padding: 20px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
-        .card-body h3 { font-size: 18px; font-weight: 600; color: #f9fafb; margin-bottom: 6px; }
-        .card-body p { font-size: 13px; color: #9ca3af; margin-bottom: 18px; line-height: 1.4; }
-        .btn-buy { background: #fff; color: #0b0f17; border: none; padding: 13px; border-radius: 10px; font-weight: 700; cursor: pointer; width: 100%; font-size: 14px; transition: all 0.2s; }
+        .discount-badge { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); color: #fbbf24; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .card-body { padding: 14px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-body h3 { font-size: 15px; font-weight: 600; color: #f9fafb; margin-bottom: 4px; }
+        .card-body p { font-size: 11px; color: #9ca3af; margin-bottom: 14px; line-height: 1.4; }
+        .btn-buy { background: #fff; color: #0b0f17; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 12px; transition: all 0.2s; text-align: center; text-decoration: none; display: block; }
         .btn-buy:hover { background: #f59e0b; color: #fff; }
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
         .modal-content { background: #131924; padding: 28px; border-radius: 20px; width: 100%; max-width: 380px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
@@ -45,6 +45,7 @@
 
 <div class="container">
     <div class="grid">
+        <!-- 1. Men Collection -->
         <div class="card">
             <div class="image-box">
                 <span class="discount-badge">FLAT 50% OFF</span>
@@ -52,11 +53,11 @@
             </div>
             <div class="card-body">
                 <div><h3>Men's Collection</h3><p>Oversized tees, shirts, and streetwear fits.</p></div>
-                <a href="men.html" class="btn-buy" style="display: block; text-align: center; text-decoration: none;">Explore & Order</a>
-          
+                <a href="men.html" class="btn-buy">Explore & Order</a>
             </div>
         </div>
 
+        <!-- 2. Women Collection -->
         <div class="card">
             <div class="image-box">
                 <span class="discount-badge">UP TO 60% OFF</span>
@@ -68,6 +69,7 @@
             </div>
         </div>
 
+        <!-- 3. Boy's Accessories -->
         <div class="card">
             <div class="image-box">
                 <span class="discount-badge">FLAT 55% OFF</span>
@@ -79,6 +81,7 @@
             </div>
         </div>
 
+        <!-- 4. Girl's Accessories (Direct Linked to girlsaccessories.html) -->
         <div class="card">
             <div class="image-box">
                 <span class="discount-badge">UP TO 65% OFF</span>
@@ -86,7 +89,7 @@
             </div>
             <div class="card-body">
                 <div><h3>Girl's Accessories</h3><p>Aesthetic jewellery, watches & luxury bags.</p></div>
-                <button class="btn-buy" onclick="openModal('Girl Accessories', 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600')">Explore & Order</button>
+                <a href="girlsaccessories.html" class="btn-buy">Explore & Order</a>
             </div>
         </div>
     </div>
@@ -150,3 +153,4 @@ function submitToWhatsApp() {
 </script>
 </body>
 </html>
+
