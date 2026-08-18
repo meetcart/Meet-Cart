@@ -63,30 +63,35 @@
     
     const products = {
       1: { 
+        code: "GA-101",
         title: "Combo of 12 Pair Earrings with Velvet Box", 
         price: "₹673", 
         img: "https://i.ibb.co/Ld0X8PQv/Screenshot-2026-0816-064613.jpg", 
         desc: "• Type: Jhumkhas (12 Pair Combo)<br>• Trend: Floral, Oxidised Silver<br>• Material: Alloy with Artificial Stones & Beads<br>• Occasion: Ethnic Party Wear<br>• Includes: Velvet Earrings Folding Box" 
       },
       2: { 
+        code: "GA-102",
         title: "Vintage Floral Embroidered Lace Hair Bow", 
         price: "₹150", 
         img: "https://i.ibb.co/TBQ2DcYN/IMG-20260817-114459.png", 
         desc: "• Type: Aesthetic Lace Hair Bow / Bun Clip<br>• Trend: Vintage Floral Embroidery with Pearl Accents<br>• Material: Premium Fabric & Lace<br>• Color: White Floral<br>• Occasion: Partywear & Everyday Aesthetic Look" 
       },
       3: { 
+        code: "GA-103",
         title: "LED Light Up Butterfly Hair Clip (Pack of 2)", 
         price: "₹199", 
         img: "https://i.ibb.co/mVgrwGCz/IMG-20260817-121041.jpg", 
         desc: "• Type: Creative LED Flashing Hair Clip (Pack of 2)<br>• Feature: Glowing Optical Fiber Butterfly Braid<br>• Color: Multicolor Light<br>• Occasion: Parties, Concerts, Festivals & Night Styling" 
       },
       4: { 
+        code: "GA-104",
         title: "Exquisite Princess Pearl Butterfly Tiara Crown", 
         price: "₹349", 
         img: "https://i.ibb.co/DPsmtDdc/IMG-20260817-124016.jpg", 
         desc: "• Type: Princess Tiara Crown / Hair Band<br>• Design: Pearl & Butterfly Embellishments<br>• Material: High-Grade Metal Alloy<br>• Color: White / Silver Finish<br>• Occasion: Birthdays, Parties, Weddings & Festive Styling" 
       },
       5: { 
+        code: "GA-105",
         title: "12 Pcs Kids Rainbow Braids Hair Clip-in Extensions", 
         price: "₹199", 
         img: "https://i.ibb.co/C5whJn3n/IMG-20260817-130237.jpg", 
@@ -117,7 +122,15 @@
       document.getElementById('mDesc').innerHTML = p.desc;
       
       const plainDesc = p.desc.replace(/<br>/g, "\n").replace(/<\/?[^>]+(>|$)/g, "");
-      const msg = `Hi! I want to order this product:\n\n*Item:* ${p.title}\n*Price:* ${p.price}\n\n*Details:*\n${plainDesc}\n\nPlease confirm availability.`;
+      
+      const msg = 
+        `*NEW ORDER INQUIRY*\n\n` +
+        `*Product Code:* ${p.code}\n` +
+        `*Item:* ${p.title}\n` +
+        `*Price:* ${p.price}\n\n` +
+        `*Product Photo:* ${p.img}\n\n` +
+        `*Details:*\n${plainDesc}\n\n` +
+        `Please confirm availability & delivery.`;
       
       document.getElementById('mOrderBtn').href = `https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`;
       document.getElementById('productModal').style.display = 'flex';
