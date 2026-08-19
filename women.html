@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MeetCart</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #0b0f17; color: #f3f4f6; padding-bottom: 50px; }
+        header { background: rgba(11, 15, 23, 0.8); backdrop-filter: blur(12px); position: sticky; top: 0; z-index: 100; padding: 18px 25px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); display: flex; justify-content: space-between; align-items: center; }
+        header .logo { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; color: #fff; }
+        header .logo span { color: #d97706; }
+        header .tagline { font-size: 12px; color: #9ca3af; letter-spacing: 1px; text-transform: uppercase; }
+        .container { max-width: 1200px; margin: 25px auto; padding: 0 12px; }
+        .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .card { background: #131924; border-radius: 16px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.06); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); display: flex; flex-direction: column; cursor: pointer; user-select: none; }
+        .card:hover { transform: translateY(-6px); border-color: rgba(217, 119, 6, 0.4); box-shadow: 0 12px 30px rgba(0,0,0,0.5); }
+        .image-box { position: relative; width: 100%; height: 200px; overflow: hidden; cursor: pointer; }
+        .image-box img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; display: block; }
+        .card:hover .image-box img { transform: scale(1.04); }
+        .discount-badge { position: absolute; top: 10px; right: 10px; background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(8px); color: #fbbf24; font-size: 10px; font-weight: 700; padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(251, 191, 36, 0.3); }
+        .card-body { padding: 14px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
+        .card-body h3 { font-size: 15px; font-weight: 600; color: #f9fafb; margin-bottom: 4px; }
+        .card-body p { font-size: 11px; color: #9ca3af; margin-bottom: 14px; line-height: 1.4; }
+        
+        /* Yellow Button Styling */
+        .btn-buy { background: #f59e0b; color: #0b0f17; border: none; padding: 11px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 12px; transition: all 0.2s; text-align: center; text-decoration: none; display: block; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); }
+        .card:hover .btn-buy, .btn-buy:hover { background: #d97706; }
+        
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
+        .modal-content { background: #131924; padding: 28px; border-radius: 20px; width: 100%; max-width: 380px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
+        .close-btn { position: absolute; top: 16px; right: 20px; font-size: 22px; cursor: pointer; color: #9ca3af; }
+        .modal h3 { font-size: 18px; font-weight: 700; margin-bottom: 18px; text-align: center; color: #f59e0b; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label { font-size: 12px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 6px; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 1px solid rgba(255, 255, 255, 0.1); background: #0b0f17; color: #fff; border-radius: 8px; font-size: 13px; outline: none; }
+        .form-group input:focus, .form-group textarea:focus { border-color: #f59e0b; }
+        .btn-submit { background: #22c55e; color: #fff; border: none; padding: 13px; width: 100%; border-radius: 8px; font-weight: 700; font-size: 15px; cursor: pointer; margin-top: 8px; transition: 0.2s; }
+        .btn-submit:hover { background: #16a34a; }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">Meet<span>Cart</span></div>
+    <div class="tagline">Curated Collection</div>
+</header>
+
+<div class="container">
+    <div class="grid">
+        <!-- 1. Men Collection -->
+        <div class="card" onclick="window.location.href='men.html'">
+            <div class="image-box">
+                <span class="discount-badge">FLAT 50% OFF</span>
+                <img src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=600" alt="Men Wear">
+            </div>
+            <div class="card-body">
+                <div><h3>Men's Collection</h3><p>Oversized tees, shirts, and streetwear fits.</p></div>
+                <a href="men.html" class="btn-buy" onclick="event.stopPropagation();">Explore & Order</a>
+            </div>
+        </div>
+
+        <!-- 2. Women Collection (Now directly opens women.html) -->
+        <div class="card" onclick="window.location.href='women.html'">
+            <div class="image-box">
+                <span class="discount-badge">UP TO 60% OFF</span>
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Women Wear">
+            </div>
+            <div class="card-body">
+                <div><h3>Women's Collection</h3><p>Trending dresses, tops, and aesthetic outfits.</p></div>
+                <a href="women.html" class="btn-buy" onclick="event.stopPropagation();">Explore & Order</a>
+            </div>
+        </div>
+
+        <!-- 3. Boy's Accessories -->
+        <div class="card" onclick="openModal('Boy Accessories', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600')">
+            <div class="image-box">
+                <span class="discount-badge">FLAT 55% OFF</span>
+                <img src="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600" alt="Men Accessories">
+            </div>
+            <div class="card-body">
+                <div><h3>Boy's Accessories</h3><p>Watches, sunglasses, chains & essential gear.</p></div>
+                <button class="btn-buy" onclick="event.stopPropagation(); openModal('Boy Accessories', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600')">Explore & Order</button>
+            </div>
+        </div>
+
+        <!-- 4. Girl's Accessories -->
+        <div class="card" onclick="window.location.href='girlsaccessories.html'">
+            <div class="image-box">
+                <span class="discount-badge">UP TO 65% OFF</span>
+                <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600" alt="Women Accessories">
+            </div>
+            <div class="card-body">
+                <div><h3>Girl's Accessories</h3><p>Aesthetic jewellery, watches & luxury bags.</p></div>
+                <a href="girlsaccessories.html" class="btn-buy" onclick="event.stopPropagation();">Explore & Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="orderModal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h3>Order Details</h3>
+        <form id="orderForm">
+            <input type="hidden" id="selectedCat">
+            <input type="hidden" id="selectedImg">
+            <div class="form-group"><label>Full Name</label><input type="text" id="custName" required placeholder="Enter your name"></div>
+            <div class="form-group"><label>Mobile Number</label><input type="tel" id="custPhone" required placeholder="10-digit number"></div>
+            <div class="form-group"><label>Product / Photo Detail</label><input type="text" id="itemDetail" placeholder="What item do you need?"></div>
+            <div class="form-group"><label>Delivery Address</label><textarea id="custAddress" rows="3" required placeholder="Complete address with landmark"></textarea></div>
+            <div class="form-group"><label>Pincode</label><input type="text" id="custPincode" required placeholder="6-digit pincode"></div>
+            <button type="button" class="btn-submit" onclick="submitToWhatsApp()">Order on WhatsApp</button>
+        </form>
+    </div>
+</div>
+
+<script>
+const myWhatsAppNumber = "919251221747";
+
+function openModal(category, imageUrl) {
+    document.getElementById('selectedCat').value = category;
+    document.getElementById('selectedImg').value = imageUrl;
+    document.getElementById('orderModal').style.display = 'flex';
+}
+function closeModal() {
+    document.getElementById('orderModal').style.display = 'none';
+}
+function submitToWhatsApp() {
+    const name = document.getElementById('custName').value.trim();
+    const phone = document.getElementById('custPhone').value.trim();
+    const item = document.getElementById('itemDetail').value.trim() || 'Catalogue Inquiry';
+    const address = document.getElementById('custAddress').value.trim();
+    const pincode = document.getElementById('custPincode').value.trim();
+    const cat = document.getElementById('selectedCat').value;
+    const imgUrl = document.getElementById('selectedImg').value;
+
+    if (!name || !phone || !address || !pincode) {
+        alert("Please fill all required details.");
+        return;
+    }
+
+    const message =
+        `*NEW ORDER INQUIRY*\n\n` +
+        `*Category:* ${cat}\n` +
+        `*Requirement:* ${item}\n` +
+        `*Product Photo:* ${imgUrl}\n\n` +
+        `*Customer Info:*\n` +
+        `• *Name:* ${name}\n` +
+        `• *Phone:* ${phone}\n` +
+        `• *Address:* ${address}\n` +
+        `• *Pincode:* ${pincode}`;
+
+    window.open(`https://wa.me/${myWhatsAppNumber}?text=${encodeURIComponent(message)}`, '_blank');
+}
+</script>
+</body>
+</html>
