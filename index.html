@@ -23,8 +23,11 @@
         .card-body { padding: 14px; display: flex; flex-direction: column; justify-content: space-between; flex-grow: 1; }
         .card-body h3 { font-size: 15px; font-weight: 600; color: #f9fafb; margin-bottom: 4px; }
         .card-body p { font-size: 11px; color: #9ca3af; margin-bottom: 14px; line-height: 1.4; }
-        .btn-buy { background: #fff; color: #0b0f17; border: none; padding: 10px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 12px; transition: all 0.2s; text-align: center; text-decoration: none; display: block; }
-        .btn-buy:hover { background: #f59e0b; color: #fff; }
+        
+        /* Yellow Button Styling */
+        .btn-buy { background: #f59e0b; color: #0b0f17; border: none; padding: 11px; border-radius: 8px; font-weight: 700; cursor: pointer; width: 100%; font-size: 12px; transition: all 0.2s; text-align: center; text-decoration: none; display: block; box-shadow: 0 2px 8px rgba(245, 158, 11, 0.25); }
+        .btn-buy:hover { background: #d97706; }
+        
         .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
         .modal-content { background: #131924; padding: 28px; border-radius: 20px; width: 100%; max-width: 380px; position: relative; border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; }
         .close-btn { position: absolute; top: 16px; right: 20px; font-size: 22px; cursor: pointer; color: #9ca3af; }
@@ -81,7 +84,7 @@
             </div>
         </div>
 
-        <!-- 4. Girl's Accessories (Direct Linked to girlsaccessories.html) -->
+        <!-- 4. Girl's Accessories -->
         <div class="card">
             <div class="image-box">
                 <span class="discount-badge">UP TO 65% OFF</span>
@@ -153,4 +156,3 @@ function submitToWhatsApp() {
 </script>
 </body>
 </html>
-
