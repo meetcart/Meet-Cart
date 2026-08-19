@@ -5,47 +5,71 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Girl's Accessories - MeetCart</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-    body { background: #0b0f17; color: #f3f4f6; padding: 15px 10px; text-align: center; }
+    body { background: #0b0f17; color: #f3f4f6; padding: 15px 10px 40px; text-align: center; }
 
     .header-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; padding: 0 5px; }
     .back-btn { color: #f59e0b; text-decoration: none; font-weight: 600; font-size: 13px; }
     h1 { font-size: 20px; color: #fff; }
 
-    /* Grid */
+    /* 2 Column Grid */
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: 0 auto; }
-    .card { background: #131924; border-radius: 12px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-align: left; display: flex; flex-direction: column; justify-content: space-between; }
+    .card { background: #131924; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: transform 0.2s ease, border-color 0.2s ease; }
+    .card:hover { transform: translateY(-4px); border-color: rgba(245, 158, 11, 0.4); }
     .card img { width: 100%; height: 180px; object-fit: contain; background: #080c13; display: block; }
     .card-info { padding: 10px; }
     .card-info h3 { font-size: 13px; margin-bottom: 4px; color: #fff; line-height: 1.3; font-weight: 600; }
     .card-info .price { color: #f59e0b; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
     .btn-view { display: block; text-align: center; background: rgba(255,255,255,0.06); color: #fff; padding: 6px 4px; border-radius: 6px; font-size: 11px; font-weight: 600; }
 
-    /* Modal Popup */
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.88); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
-    .modal-content { background: #131924; border-radius: 16px; max-width: 400px; width: 100%; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
-    .close-btn { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
-    
-    .modal-img { width: 100%; max-height: 270px; object-fit: contain; background: #080c13; display: block; }
-    .modal-body { padding: 16px; }
-    .modal-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .modal-price { font-size: 16px; color: #f59e0b; font-weight: 700; margin-bottom: 10px; }
-    .modal-desc { font-size: 12px; color: #9ca3af; line-height: 1.5; margin-bottom: 14px; }
+    /* Base Modal Styling */
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; animation: fadeIn 0.2s ease-out; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-    /* Order Button (Step 1) */
-    .btn-step1 { display: block; width: 100%; padding: 12px; background: #f59e0b; color: #0b0f17; text-align: center; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; }
-    .btn-step1:hover { background: #d97706; }
+    .modal-content { background: #131924; border-radius: 18px; max-width: 390px; width: 100%; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; position: relative; text-align: left; box-shadow: 0 20px 40px rgba(0,0,0,0.6); max-height: 90vh; overflow-y: auto; }
+    .close-btn { position: absolute; top: 12px; right: 12px; font-size: 20px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; transition: background 0.2s; }
+    .close-btn:hover { background: rgba(255,255,255,0.2); }
     
-    /* Order Form Container (Step 2 - initially hidden) */
-    #formSection { display: none; margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
-    .form-title { font-size: 12px; font-weight: 700; color: #f59e0b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    /* Product Details Modal (Popup 1) */
+    .modal-img { width: 100%; max-height: 280px; object-fit: contain; background: #080c13; display: block; }
+    .modal-body { padding: 18px; }
+    .modal-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.3; }
+    .modal-price { font-size: 18px; color: #f59e0b; font-weight: 700; margin-bottom: 12px; }
+    .modal-desc { font-size: 12.5px; color: #9ca3af; line-height: 1.5; margin-bottom: 18px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
+    
+    .btn-order-now { display: block; width: 100%; padding: 13px; background: #f59e0b; color: #0b0f17; text-align: center; font-weight: 700; border-radius: 10px; font-size: 14px; border: none; cursor: pointer; transition: background 0.2s, transform 0.1s; }
+    .btn-order-now:hover { background: #d97706; }
+    .btn-order-now:active { transform: scale(0.98); }
+
+    /* Form Modal (Popup 2) */
+    .form-modal-body { padding: 22px 18px; }
+    .form-modal-header { text-align: center; margin-bottom: 14px; }
+    .form-modal-header h3 { font-size: 17px; font-weight: 700; color: #fff; }
+
+    /* Mini Product Preview Card */
+    .mini-product-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); padding: 10px; border-radius: 12px; margin-bottom: 14px; }
+    .mini-product-card img { width: 56px; height: 56px; border-radius: 8px; object-fit: cover; background: #080c13; }
+    .mini-card-info { flex: 1; min-width: 0; }
+    .mini-card-info h4 { font-size: 12.5px; color: #fff; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
+    .mini-card-info .mini-price { font-size: 13px; color: #f59e0b; font-weight: 700; }
+
+    /* Quantity Selector */
+    .qty-row { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 10px 12px; border-radius: 10px; margin-bottom: 14px; }
+    .qty-label { font-size: 12.5px; font-weight: 600; color: #e5e7eb; }
+    .qty-controls { display: flex; align-items: center; gap: 8px; }
+    .qty-btn { width: 28px; height: 28px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 6px; font-size: 16px; font-weight: 700; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s; }
+    .qty-btn:hover { background: #f59e0b; color: #0b0f17; }
+    .qty-display { font-size: 14px; font-weight: 700; color: #fff; min-width: 24px; text-align: center; }
+
     .form-group { margin-bottom: 10px; }
     .form-group label { font-size: 11px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 4px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 9px 10px; border: 1px solid rgba(255, 255, 255, 0.1); background: #0b0f17; color: #fff; border-radius: 6px; font-size: 12px; outline: none; }
+    .form-group input, .form-group textarea { width: 100%; padding: 9px 10px; border: 1px solid rgba(255, 255, 255, 0.1); background: #0b0f17; color: #fff; border-radius: 6px; font-size: 12.5px; outline: none; transition: border-color 0.2s; }
     .form-group input:focus, .form-group textarea:focus { border-color: #f59e0b; }
-    .btn-submit { display: block; width: 100%; padding: 12px; background: #22c55e; color: #fff; text-align: center; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; margin-top: 12px; }
-    .btn-submit:hover { background: #16a34a; }
+    
+    .btn-submit-wa { display: flex; justify-content: center; align-items: center; gap: 8px; width: 100%; padding: 12px; background: #22c55e; color: #fff; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; margin-top: 12px; transition: background 0.2s, transform 0.1s; }
+    .btn-submit-wa:hover { background: #16a34a; }
+    .btn-submit-wa:active { transform: scale(0.98); }
   </style>
 </head>
 <body>
@@ -58,53 +82,82 @@
 
   <div class="grid" id="productGrid"></div>
 
+  <!-- POPUP 1: Pure Product Details -->
   <div class="modal" id="productModal">
     <div class="modal-content">
-      <div class="close-btn" onclick="closeProduct()">&times;</div>
+      <div class="close-btn" onclick="closeProductModal()">&times;</div>
       <img id="mImg" class="modal-img" src="" alt="Product">
       <div class="modal-body">
         <h2 id="mTitle" class="modal-title"></h2>
         <div id="mPrice" class="modal-price"></div>
         <div id="mDesc" class="modal-desc"></div>
+        <button type="button" class="btn-order-now" onclick="openOrderFormModal()">Order Now</button>
+      </div>
+    </div>
+  </div>
 
-        <!-- Step 1: Click to Order Button -->
-        <button type="button" id="btnOrderNow" class="btn-step1" onclick="showForm()">Order Now</button>
-
-        <!-- Step 2: Hidden Delivery Details Form -->
-        <div id="formSection">
-          <div class="form-title">Enter Delivery Details</div>
-          <div class="form-group">
-            <label>Full Name *</label>
-            <input type="text" id="custName" placeholder="Enter full name">
-          </div>
-          <div class="form-group">
-            <label>Mobile Number *</label>
-            <input type="tel" id="custPhone" placeholder="10-digit mobile number">
-          </div>
-          <div class="form-group">
-            <label>Complete Address *</label>
-            <textarea id="custAddress" rows="2" placeholder="House no, street, landmark, city"></textarea>
-          </div>
-          <div class="form-group">
-            <label>Pincode *</label>
-            <input type="text" id="custPincode" placeholder="6-digit pincode">
-          </div>
-
-          <button type="button" class="btn-submit" onclick="submitOrder()">Send Order on WhatsApp</button>
+  <!-- POPUP 2: Dedicated Delivery Details & Quantity Modal -->
+  <div class="modal" id="orderFormModal">
+    <div class="modal-content">
+      <div class="close-btn" onclick="closeOrderFormModal()">&times;</div>
+      <div class="form-modal-body">
+        <div class="form-modal-header">
+          <h3>Confirm Order</h3>
         </div>
 
+        <!-- Mini Product Preview -->
+        <div class="mini-product-card">
+          <img id="miniImg" src="" alt="Thumbnail">
+          <div class="mini-card-info">
+            <h4 id="miniTitle"></h4>
+            <div class="mini-price"><span id="miniPriceUnit"></span> <span id="miniTotalDisplay" style="color:#9ca3af; font-size:11px; font-weight:normal;"></span></div>
+          </div>
+        </div>
+
+        <!-- Quantity Selector (1 to 20) -->
+        <div class="qty-row">
+          <span class="qty-label">Quantity:</span>
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" onclick="updateQty(-1)">−</button>
+            <span class="qty-display" id="qtyVal">1</span>
+            <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Full Name *</label>
+          <input type="text" id="custName" placeholder="Enter your full name">
+        </div>
+        <div class="form-group">
+          <label>Mobile Number *</label>
+          <input type="tel" id="custPhone" placeholder="10-digit mobile number">
+        </div>
+        <div class="form-group">
+          <label>Delivery Address *</label>
+          <textarea id="custAddress" rows="2" placeholder="House no, Street, Landmark, City"></textarea>
+        </div>
+        <div class="form-group">
+          <label>Pincode *</label>
+          <input type="text" id="custPincode" placeholder="6-digit pincode">
+        </div>
+
+        <button type="button" class="btn-submit-wa" onclick="submitOrderToWhatsApp()">
+          Confirm & Order on WhatsApp
+        </button>
       </div>
     </div>
   </div>
 
   <script>
     const whatsappNum = "919251221747";
-    let selectedProductId = null;
+    let currentSelectedId = null;
+    let selectedQuantity = 1;
     
     const products = {
       1: { 
         code: "GA-101",
         title: "Combo of 12 Pair Earrings with Velvet Box", 
+        priceNum: 673,
         price: "₹673", 
         img: "https://i.ibb.co/Ld0X8PQv/Screenshot-2026-0816-064613.jpg", 
         desc: "• Type: Jhumkhas (12 Pair Combo)<br>• Trend: Floral, Oxidised Silver<br>• Material: Alloy with Artificial Stones & Beads<br>• Occasion: Ethnic Party Wear<br>• Includes: Velvet Earrings Folding Box" 
@@ -112,6 +165,7 @@
       2: { 
         code: "GA-102",
         title: "Vintage Floral Embroidered Lace Hair Bow", 
+        priceNum: 150,
         price: "₹150", 
         img: "https://i.ibb.co/TBQ2DcYN/IMG-20260817-114459.png", 
         desc: "• Type: Aesthetic Lace Hair Bow / Bun Clip<br>• Trend: Vintage Floral Embroidery with Pearl Accents<br>• Material: Premium Fabric & Lace<br>• Color: White Floral<br>• Occasion: Partywear & Everyday Aesthetic Look" 
@@ -119,6 +173,7 @@
       3: { 
         code: "GA-103",
         title: "LED Light Up Butterfly Hair Clip (Pack of 2)", 
+        priceNum: 199,
         price: "₹199", 
         img: "https://i.ibb.co/mVgrwGCz/IMG-20260817-121041.jpg", 
         desc: "• Type: Creative LED Flashing Hair Clip (Pack of 2)<br>• Feature: Glowing Optical Fiber Butterfly Braid<br>• Color: Multicolor Light<br>• Occasion: Parties, Concerts, Festivals & Night Styling" 
@@ -126,6 +181,7 @@
       4: { 
         code: "GA-104",
         title: "Exquisite Princess Pearl Butterfly Tiara Crown", 
+        priceNum: 349,
         price: "₹349", 
         img: "https://i.ibb.co/DPsmtDdc/IMG-20260817-124016.jpg", 
         desc: "• Type: Princess Tiara Crown / Hair Band<br>• Design: Pearl & Butterfly Embellishments<br>• Material: High-Grade Metal Alloy<br>• Color: White / Silver Finish<br>• Occasion: Birthdays, Parties, Weddings & Festive Styling" 
@@ -133,6 +189,7 @@
       5: { 
         code: "GA-105",
         title: "12 Pcs Kids Rainbow Braids Hair Clip-in Extensions", 
+        priceNum: 199,
         price: "₹199", 
         img: "https://i.ibb.co/C5whJn3n/IMG-20260817-130237.jpg", 
         desc: "• Type: Clip-In Hair Extensions (Pack of 12)<br>• Style: Colorful Rainbow Braids<br>• Material: Silicone Clips & Synthetic Braids<br>• Color: Vibrant Multicolor<br>• Occasion: Parties, School Events, Styling & Everyday Fashion" 
@@ -140,6 +197,7 @@
       6: { 
         code: "GA-106",
         title: "Soft Fur Scrunchies Combo (Pack of 8)", 
+        priceNum: 149,
         price: "₹149", 
         img: "https://i.ibb.co/qYP8Tszc/IMG-20260818-120223.jpg", 
         desc: "• Type: Elastic Fur Scrunchies (Pack of 8)<br>• Material: Ultra-Soft Plush Fur & Elastic Fabric<br>• Color: Multicolor Pastel & Solid Mix<br>• Feature: Gentle on hair, prevents breakage & stylish aesthetic look<br>• Occasion: Daily Use, College & Casual Outings" 
@@ -150,7 +208,7 @@
       const grid = document.getElementById('productGrid');
       grid.innerHTML = '';
       for (let id in products) {
-        grid.innerHTML += `<div class="card" onclick="openProduct(${id})">
+        grid.innerHTML += `<div class="card" onclick="openProductModal(${id})">
           <img src="${products[id].img}" alt="${products[id].title}">
           <div class="card-info">
             <h3>${products[id].title}</h3>
@@ -161,35 +219,69 @@
       }
     }
 
-    function openProduct(id) {
-      selectedProductId = id;
+    // Step 1: Open Product Modal
+    function openProductModal(id) {
+      currentSelectedId = id;
       const p = products[id];
       document.getElementById('mTitle').innerText = p.title;
       document.getElementById('mPrice').innerText = p.price;
       document.getElementById('mImg').src = p.img;
       document.getElementById('mDesc').innerHTML = p.desc;
       
-      // Reset form view
-      document.getElementById('formSection').style.display = 'none';
-      document.getElementById('btnOrderNow').style.display = 'block';
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeProductModal() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+
+    // Step 2: Open Dedicated Delivery Form Modal
+    function openOrderFormModal() {
+      closeProductModal();
+      const p = products[currentSelectedId];
+      selectedQuantity = 1;
+      
+      document.getElementById('miniImg').src = p.img;
+      document.getElementById('miniTitle').innerText = p.title;
+      document.getElementById('miniPriceUnit').innerText = p.price;
+      document.getElementById('qtyVal').innerText = selectedQuantity;
+      updateTotalDisplay();
+      
+      // Reset inputs
       document.getElementById('custName').value = '';
       document.getElementById('custPhone').value = '';
       document.getElementById('custAddress').value = '';
       document.getElementById('custPincode').value = '';
-
-      document.getElementById('productModal').style.display = 'flex';
+      
+      document.getElementById('orderFormModal').style.display = 'flex';
     }
 
-    function showForm() {
-      document.getElementById('btnOrderNow').style.display = 'none';
-      document.getElementById('formSection').style.display = 'block';
+    function closeOrderFormModal() {
+      document.getElementById('orderFormModal').style.display = 'none';
     }
 
-    function closeProduct() { 
-      document.getElementById('productModal').style.display = 'none'; 
+    // Quantity update logic (min: 1, max: 20)
+    function updateQty(change) {
+      const newQty = selectedQuantity + change;
+      if (newQty >= 1 && newQty <= 20) {
+        selectedQuantity = newQty;
+        document.getElementById('qtyVal').innerText = selectedQuantity;
+        updateTotalDisplay();
+      }
     }
 
-    function submitOrder() {
+    function updateTotalDisplay() {
+      const p = products[currentSelectedId];
+      const total = p.priceNum * selectedQuantity;
+      if (selectedQuantity > 1) {
+        document.getElementById('miniTotalDisplay').innerText = `(Total: ₹${total})`;
+      } else {
+        document.getElementById('miniTotalDisplay').innerText = '';
+      }
+    }
+
+    // Step 3: Send Order to WhatsApp
+    function submitOrderToWhatsApp() {
       const name = document.getElementById('custName').value.trim();
       const phone = document.getElementById('custPhone').value.trim();
       const address = document.getElementById('custAddress').value.trim();
@@ -200,14 +292,16 @@
         return;
       }
 
-      const p = products[selectedProductId];
-      const plainDesc = p.desc.replace(/<br>/g, "\n").replace(/<\/?[^>]+(>|$)/g, "");
+      const p = products[currentSelectedId];
+      const totalAmount = p.priceNum * selectedQuantity;
       
       const msg = 
         `*NEW ORDER PLACED*\n\n` +
         `*Product Code:* ${p.code}\n` +
         `*Item:* ${p.title}\n` +
-        `*Price:* ${p.price}\n` +
+        `*Unit Price:* ${p.price}\n` +
+        `*Quantity:* ${selectedQuantity}\n` +
+        `*Total Amount:* ₹${totalAmount}\n\n` +
         `*Product Photo:* ${p.img}\n\n` +
         `*Customer Details:*\n` +
         `• *Name:* ${name}\n` +
@@ -217,6 +311,7 @@
         `Please confirm my order & send delivery details.`;
       
       window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
+      closeOrderFormModal();
     }
 
     renderProducts();
