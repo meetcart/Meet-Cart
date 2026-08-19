@@ -48,7 +48,7 @@
 
 <div class="container">
     <div class="grid">
-        <!-- 1. Men Collection (Click anywhere to open men.html) -->
+        <!-- 1. Men Collection -->
         <div class="card" onclick="window.location.href='men.html'">
             <div class="image-box">
                 <span class="discount-badge">FLAT 50% OFF</span>
@@ -60,19 +60,19 @@
             </div>
         </div>
 
-        <!-- 2. Women Collection (Click anywhere to open modal) -->
-        <div class="card" onclick="openModal('Women Clothing', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600')">
+        <!-- 2. Women Collection (Now directly opens women.html) -->
+        <div class="card" onclick="window.location.href='women.html'">
             <div class="image-box">
                 <span class="discount-badge">UP TO 60% OFF</span>
                 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600" alt="Women Wear">
             </div>
             <div class="card-body">
                 <div><h3>Women's Collection</h3><p>Trending dresses, tops, and aesthetic outfits.</p></div>
-                <button class="btn-buy" onclick="event.stopPropagation(); openModal('Women Clothing', 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600')">Explore & Order</button>
+                <a href="women.html" class="btn-buy" onclick="event.stopPropagation();">Explore & Order</a>
             </div>
         </div>
 
-        <!-- 3. Boy's Accessories (Click anywhere to open modal) -->
+        <!-- 3. Boy's Accessories -->
         <div class="card" onclick="openModal('Boy Accessories', 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=600')">
             <div class="image-box">
                 <span class="discount-badge">FLAT 55% OFF</span>
@@ -84,7 +84,7 @@
             </div>
         </div>
 
-        <!-- 4. Girl's Accessories (Click anywhere to open girlsaccessories.html) -->
+        <!-- 4. Girl's Accessories -->
         <div class="card" onclick="window.location.href='girlsaccessories.html'">
             <div class="image-box">
                 <span class="discount-badge">UP TO 65% OFF</span>
