@@ -27,20 +27,25 @@
     .modal-content { background: #131924; border-radius: 16px; max-width: 400px; width: 100%; border: 1px solid rgba(255,255,255,0.15); overflow: hidden; position: relative; text-align: left; max-height: 90vh; overflow-y: auto; }
     .close-btn { position: absolute; top: 10px; right: 12px; font-size: 22px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
     
-    .modal-img { width: 100%; max-height: 250px; object-fit: contain; background: #080c13; display: block; }
+    .modal-img { width: 100%; max-height: 270px; object-fit: contain; background: #080c13; display: block; }
     .modal-body { padding: 16px; }
     .modal-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
-    .modal-price { font-size: 15px; color: #f59e0b; font-weight: 700; margin-bottom: 10px; }
-    .modal-desc { font-size: 12px; color: #9ca3af; line-height: 1.4; margin-bottom: 14px; }
+    .modal-price { font-size: 16px; color: #f59e0b; font-weight: 700; margin-bottom: 10px; }
+    .modal-desc { font-size: 12px; color: #9ca3af; line-height: 1.5; margin-bottom: 14px; }
+
+    /* Order Button (Step 1) */
+    .btn-step1 { display: block; width: 100%; padding: 12px; background: #f59e0b; color: #0b0f17; text-align: center; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; }
+    .btn-step1:hover { background: #d97706; }
     
-    /* Order Form */
-    .form-title { font-size: 12px; font-weight: 700; color: #f59e0b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
+    /* Order Form Container (Step 2 - initially hidden) */
+    #formSection { display: none; margin-top: 14px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 12px; }
+    .form-title { font-size: 12px; font-weight: 700; color: #f59e0b; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
     .form-group { margin-bottom: 10px; }
     .form-group label { font-size: 11px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 4px; }
     .form-group input, .form-group textarea { width: 100%; padding: 9px 10px; border: 1px solid rgba(255, 255, 255, 0.1); background: #0b0f17; color: #fff; border-radius: 6px; font-size: 12px; outline: none; }
     .form-group input:focus, .form-group textarea:focus { border-color: #f59e0b; }
-    .btn-order { display: block; width: 100%; padding: 12px; background: #22c55e; color: #fff; text-align: center; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; margin-top: 12px; }
-    .btn-order:hover { background: #16a34a; }
+    .btn-submit { display: block; width: 100%; padding: 12px; background: #22c55e; color: #fff; text-align: center; font-weight: 700; border-radius: 8px; font-size: 14px; border: none; cursor: pointer; margin-top: 12px; }
+    .btn-submit:hover { background: #16a34a; }
   </style>
 </head>
 <body>
@@ -62,26 +67,32 @@
         <div id="mPrice" class="modal-price"></div>
         <div id="mDesc" class="modal-desc"></div>
 
-        <!-- Customer Form -->
-        <div class="form-title">Enter Delivery Details</div>
-        <div class="form-group">
-          <label>Full Name *</label>
-          <input type="text" id="custName" placeholder="Enter full name">
-        </div>
-        <div class="form-group">
-          <label>Mobile Number *</label>
-          <input type="tel" id="custPhone" placeholder="10-digit mobile number">
-        </div>
-        <div class="form-group">
-          <label>Complete Address *</label>
-          <textarea id="custAddress" rows="2" placeholder="House no, street, landmark, city"></textarea>
-        </div>
-        <div class="form-group">
-          <label>Pincode *</label>
-          <input type="text" id="custPincode" placeholder="6-digit pincode">
+        <!-- Step 1: Click to Order Button -->
+        <button type="button" id="btnOrderNow" class="btn-step1" onclick="showForm()">Order Now</button>
+
+        <!-- Step 2: Hidden Delivery Details Form -->
+        <div id="formSection">
+          <div class="form-title">Enter Delivery Details</div>
+          <div class="form-group">
+            <label>Full Name *</label>
+            <input type="text" id="custName" placeholder="Enter full name">
+          </div>
+          <div class="form-group">
+            <label>Mobile Number *</label>
+            <input type="tel" id="custPhone" placeholder="10-digit mobile number">
+          </div>
+          <div class="form-group">
+            <label>Complete Address *</label>
+            <textarea id="custAddress" rows="2" placeholder="House no, street, landmark, city"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Pincode *</label>
+            <input type="text" id="custPincode" placeholder="6-digit pincode">
+          </div>
+
+          <button type="button" class="btn-submit" onclick="submitOrder()">Send Order on WhatsApp</button>
         </div>
 
-        <button type="button" class="btn-order" onclick="submitOrder()">Order on WhatsApp</button>
       </div>
     </div>
   </div>
@@ -144,7 +155,7 @@
           <div class="card-info">
             <h3>${products[id].title}</h3>
             <div class="price">${products[id].price}</div>
-            <span class="btn-view">View Details & Order</span>
+            <span class="btn-view">View Details</span>
           </div>
         </div>`;
       }
@@ -158,13 +169,20 @@
       document.getElementById('mImg').src = p.img;
       document.getElementById('mDesc').innerHTML = p.desc;
       
-      // Clear inputs
+      // Reset form view
+      document.getElementById('formSection').style.display = 'none';
+      document.getElementById('btnOrderNow').style.display = 'block';
       document.getElementById('custName').value = '';
       document.getElementById('custPhone').value = '';
       document.getElementById('custAddress').value = '';
       document.getElementById('custPincode').value = '';
 
       document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function showForm() {
+      document.getElementById('btnOrderNow').style.display = 'none';
+      document.getElementById('formSection').style.display = 'block';
     }
 
     function closeProduct() { 
