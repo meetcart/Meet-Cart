@@ -22,33 +22,28 @@
     .card-info .price { color: #f59e0b; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
     .btn-view { display: block; text-align: center; background: #f59e0b; color: #0b0f17; padding: 7px 4px; border-radius: 6px; font-size: 11.5px; font-weight: 700; }
 
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 15px; z-index: 1000; animation: fadeIn 0.2s ease-out; }
     .modal-content { background: #131924; border-radius: 18px; max-width: 390px; width: 100%; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6); max-height: 90vh; overflow-y: auto; }
     .close-btn { position: absolute; top: 12px; right: 12px; font-size: 20px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.6); width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; }
-    
     .modal-img { width: 100%; height: 300px; object-fit: contain; background: #080c13; display: block; padding: 6px; }
-    .modal-body { padding: 18px; }
+    .modal-body { padding: 18px; text-align: left; }
     .modal-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; }
     .modal-price { font-size: 18px; color: #f59e0b; font-weight: 700; margin-bottom: 12px; }
     .modal-desc { font-size: 12.5px; color: #9ca3af; line-height: 1.5; margin-bottom: 18px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; }
     .btn-order-now { display: block; width: 100%; padding: 13px; background: #f59e0b; color: #0b0f17; font-weight: 700; border-radius: 10px; border: none; cursor: pointer; }
 
     .form-modal-body { padding: 22px 18px; text-align: left; }
-    .mini-product-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); padding: 12px; border-radius: 12px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.08); }
-    .mini-product-card img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: #080c13; }
-    
-    .qty-row { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 12px 15px; border-radius: 10px; margin-bottom: 16px; border: 1px solid rgba(255,255,255,0.06); }
-    .qty-btn { width: 32px; height: 32px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15); color: #fff; border-radius: 8px; font-weight: 700; cursor: pointer; }
-    .qty-display { font-size: 15px; font-weight: 700; min-width: 30px; text-align: center; }
-
-    .form-group { margin-bottom: 14px; }
+    .mini-product-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); padding: 10px; border-radius: 12px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); }
+    .mini-product-card img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; }
+    .qty-row { display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.03); padding: 10px 15px; border-radius: 10px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.06); }
+    .qty-btn { width: 32px; height: 32px; background: rgba(255,255,255,0.1); border: none; color: #fff; border-radius: 8px; font-weight: 700; cursor: pointer; }
+    .form-group { margin-bottom: 12px; }
     .form-group label { font-size: 11.5px; font-weight: 600; color: #9ca3af; display: block; margin-bottom: 5px; }
-    .form-group input, .form-group textarea { width: 100%; padding: 11px; background: #0b0f17; color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 13px; }
+    .form-group input, .form-group textarea { width: 100%; padding: 10px; background: #0b0f17; color: #fff; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; font-size: 13px; }
     .btn-submit-wa { width: 100%; padding: 14px; background: #22c55e; color: #fff; border: none; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 10px; }
   </style>
 </head>
 <body>
-
   <div class="header-nav">
     <a href="index.html" class="back-btn">← Back to Home</a>
     <h1>Boy's Accessories</h1>
@@ -76,20 +71,20 @@
     <div class="modal-content">
       <div class="close-btn" onclick="document.getElementById('orderFormModal').style.display='none'">&times;</div>
       <div class="form-modal-body">
-        <h3 style="margin-bottom: 15px;">Confirm Order</h3>
+        <h3>Confirm Order</h3>
         <div class="mini-product-card"><img id="miniImg"><div class="mini-card-info"><h4 id="miniTitle"></h4><div id="miniPriceUnit"></div></div></div>
         <div class="qty-row">
             <span style="font-size:13px; font-weight:600;">Quantity:</span>
             <div style="display:flex; align-items:center; gap:10px;">
                 <button class="qty-btn" onclick="updateQty(-1)">−</button>
-                <span class="qty-display" id="qtyVal">1</span>
+                <span id="qtyVal" style="font-weight:700;">1</span>
                 <button class="qty-btn" onclick="updateQty(1)">+</button>
             </div>
         </div>
-        <div class="form-group"><label>Full Name *</label><input type="text" id="custName" placeholder="Enter name"></div>
-        <div class="form-group"><label>Mobile Number *</label><input type="tel" id="custPhone" placeholder="Mobile no"></div>
-        <div class="form-group"><label>Delivery Address *</label><textarea id="custAddress" rows="2" placeholder="Full address"></textarea></div>
-        <div class="form-group"><label>Pincode *</label><input type="text" id="custPincode" placeholder="Pincode"></div>
+        <div class="form-group"><label>Full Name *</label><input type="text" id="custName"></div>
+        <div class="form-group"><label>Mobile Number *</label><input type="tel" id="custPhone"></div>
+        <div class="form-group"><label>Delivery Address *</label><textarea id="custAddress" rows="2"></textarea></div>
+        <div class="form-group"><label>Pincode *</label><input type="text" id="custPincode"></div>
         <button class="btn-submit-wa" onclick="submitOrder()">Confirm & Order on WhatsApp</button>
       </div>
     </div>
@@ -114,7 +109,26 @@
     function updateQty(c) { selectedQuantity = Math.max(1, Math.min(20, selectedQuantity + c)); document.getElementById('qtyVal').innerText = selectedQuantity; }
     function submitOrder() {
         const p = products[currentId];
-        const msg = `*NEW ORDER*\nItem: ${p.title}\nQty: ${selectedQuantity}\nTotal: ₹${p.priceNum * selectedQuantity}\nName: ${document.getElementById('custName').value}\nPhone: ${document.getElementById('custPhone').value}\nAddress: ${document.getElementById('custAddress').value}\nPin: ${document.getElementById('custPincode').value}`;
+        const name = document.getElementById('custName').value;
+        const phone = document.getElementById('custPhone').value;
+        const address = document.getElementById('custAddress').value;
+        const pin = document.getElementById('custPincode').value;
+        const total = p.priceNum * selectedQuantity;
+        
+        const msg = `*NEW ORDER PLACED*\n\n` +
+            `*Product Code:* ${p.code}\n` +
+            `*Item:* ${p.title}\n` +
+            `*Unit Price:* ${p.price}\n` +
+            `*Quantity:* ${selectedQuantity}\n` +
+            `*Total Amount:* ₹${total}\n` +
+            `*Product Photo:* ${p.img}\n\n` +
+            `*Customer Details:*\n` +
+            `• *Name:* ${name}\n` +
+            `• *Phone:* ${phone}\n` +
+            `• *Delivery Address:* ${address}\n` +
+            `• *Pincode:* ${pin}\n\n` +
+            `Please confirm my order & send delivery details.`;
+            
         window.open(`https://wa.me/${whatsappNum}?text=${encodeURIComponent(msg)}`, '_blank');
     }
     render();
