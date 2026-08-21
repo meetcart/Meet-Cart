@@ -13,29 +13,27 @@
     .back-btn { color: #f59e0b; text-decoration: none; font-weight: 600; font-size: 13px; }
     h1 { font-size: 20px; color: #fff; }
 
-    /* 2 Column Grid */
     .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; max-width: 1000px; margin: 0 auto; }
     .card { background: #131924; border-radius: 14px; overflow: hidden; border: 1px solid rgba(255,255,255,0.08); cursor: pointer; text-align: left; display: flex; flex-direction: column; justify-content: space-between; transition: 0.2s; user-select: none; }
     .card:hover { transform: translateY(-4px); border-color: rgba(245, 158, 11, 0.4); }
     
-    /* Full-width Big Edge-to-Edge Image on Cards */
-    .card-img-wrapper { width: 100%; aspect-ratio: 1 / 1; overflow: hidden; background: #080c13; }
-    .card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .card-img-wrapper { width: 100%; height: 180px; overflow: hidden; background: #080c13; display: flex; align-items: center; justify-content: center; }
+    .card-img-wrapper img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 4px; }
     
     .card-info { padding: 12px 10px; }
     .card-info h3 { font-size: 13px; margin-bottom: 4px; color: #fff; font-weight: 600; line-height: 1.3; }
     .card-info .price { color: #f59e0b; font-weight: 700; font-size: 13px; margin-bottom: 8px; }
     .btn-view { display: block; text-align: center; background: #f59e0b; color: #0b0f17; padding: 8px 4px; border-radius: 6px; font-size: 11.5px; font-weight: 700; }
 
-    /* Modal Styling */
     .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; padding: 12px; z-index: 1000; animation: fadeIn 0.2s ease-out; }
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .modal-content { background: #131924; border-radius: 18px; max-width: 420px; width: 100%; border: 1px solid rgba(255,255,255,0.12); overflow: hidden; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.6); max-height: 92vh; overflow-y: auto; }
     .close-btn { position: absolute; top: 12px; right: 12px; font-size: 20px; color: #fff; cursor: pointer; background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10; border: 1px solid rgba(255,255,255,0.2); }
     
-    .modal-img-container { width: 100%; background: #000; display: flex; align-items: center; justify-content: center; }
-    .modal-img { width: 100%; height: auto; max-height: 440px; object-fit: contain; display: block; }
+    /* Improved Image Fit: Contain ensures NO cropping */
+    .modal-img-container { width: 100%; background: #000; min-height: 250px; display: flex; align-items: center; justify-content: center; }
+    .modal-img { max-width: 100%; height: auto; max-height: 400px; object-fit: contain; display: block; }
     
     .modal-body { padding: 18px; text-align: left; }
     .modal-title { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.3; }
@@ -43,7 +41,6 @@
     .modal-desc { font-size: 12.5px; color: #9ca3af; line-height: 1.5; margin-bottom: 18px; background: rgba(255,255,255,0.03); padding: 10px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05); }
     .btn-order-now { display: block; width: 100%; padding: 13px; background: #f59e0b; color: #0b0f17; font-weight: 700; border-radius: 10px; border: none; cursor: pointer; font-size: 14px; }
 
-    /* Form Modal Body */
     .form-modal-body { padding: 22px 18px; text-align: left; }
     .mini-product-card { display: flex; align-items: center; gap: 12px; background: rgba(255,255,255,0.04); padding: 10px; border-radius: 12px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); }
     .mini-product-card img { width: 60px; height: 60px; border-radius: 8px; object-fit: cover; background: #080c13; }
@@ -116,103 +113,22 @@
     let selectedQuantity = 1;
     let currentId = null;
     
+    // Yahan saare 12 products hain
     const products = { 
-      1: { 
-        code: "BA-101", 
-        title: "Pina Colada Attar 6ml Pack of 2", 
-        priceNum: 299, 
-        price: "₹299", 
-        img: "https://i.ibb.co/4ZwFRcth/Screenshot-2026-0820-184205.jpg", 
-        desc: "• Pack: 2 Bottles (6ml each)<br>• Flavour: Strawberry & Pina Colada<br>• Type: Non-Alcoholic Unisex Attar<br>• Shelf Life: 36 Months" 
-      },
-      2: { 
-        code: "BA-102", 
-        title: "Classy Men Silver Plated Designer Bracelet", 
-        priceNum: 149, 
-        price: "₹149", 
-        img: "https://iili.io/CZ2bBII.md.jpg", 
-        desc: "• Material: High Quality Stainless Steel<br>• Color: Premium Silver<br>• Type: Designer Link Chain Bracelet<br>• Closure: Sturdy Hook Lock<br>• Occasion: Daily Wear & Casual Outings" 
-      },
-      3: { 
-        code: "BA-103", 
-        title: "Men's Designer Gold Plated Bracelet", 
-        priceNum: 299, 
-        price: "₹299", 
-        img: "https://iili.io/CZ3LxzF.md.jpg", 
-        desc: "• Plating: Gold Plated<br>• Base Metal: Brass<br>• Stone: Amethyst Stone<br>• Closure: Button Closure (Size 2-12)<br>• Occasion: Ethnic & Casual Wear" 
-      },
-      4: { 
-        code: "BA-104", 
-        title: "Men's Magnetic Chain Bracelet (Set of 2)", 
-        priceNum: 199, 
-        price: "₹199", 
-        img: "https://iili.io/CZ3ZhD7.md.jpg", 
-        desc: "• Plating: Silver Plated Alloy Metal<br>• Type: Magnetic Chain Bracelet (2-Piece Set)<br>• Sizing: Adjustable (Size 2-10)<br>• Closure: Hook Lock<br>• Style: Western / Casual" 
-      },
-      5: { 
-        code: "BA-105", 
-        title: "Men's Silver Plated Charm Bracelet", 
-        priceNum: 299, 
-        price: "₹299", 
-        img: "https://iili.io/CZ3bCo7.md.jpg", 
-        desc: "• Material: Stainless Steel (Silver Plated)<br>• Stones: Cubic Zirconia / American Diamond<br>• Length: 20cm (Weight: 20g)<br>• Closure: Foldover Clasp<br>• Style: Western & Casual Wear" 
-      },
-      6: { 
-        code: "BA-106", 
-        title: "Men's Brass Gold Plated Kada Bracelet", 
-        priceNum: 249, 
-        price: "₹249", 
-        img: "https://iili.io/CZ3yzKX.md.jpg", 
-        desc: "• Base Metal: Brass (Gold Plated)<br>• Sizing: Adjustable 8-Inch (Size 2-12)<br>• Weight: 20g (Plain Solid Design)<br>• Closure: Foldover Lock<br>• Occasion: Ethnic & Daily Wear" 
-      },
-      7: { 
-        code: "BA-107", 
-        title: "SIXER PRO Double Blade Plastic Cricket Bat", 
-        priceNum: 399, 
-        price: "₹399", 
-        img: "https://iili.io/CZF2scP.md.jpg", 
-        desc: "• Model: SIXER PRO Double Blade<br>• Material: Heavy-Duty Hard Plastic<br>• Design: Black & Multicolor Sport Edition<br>• Best For: Tennis Ball & Recreational Cricket" 
-      },
-      8: { 
-        code: "BA-108", 
-        title: "Men's Black Analog-Digital Sport Watch", 
-        priceNum: 249, 
-        price: "₹249", 
-        img: "https://iili.io/CZFC2Ul.md.jpg", 
-        desc: "• Display: Dual Analog & Digital Dial<br>• Strap: Black Rubber / Silicone Strap<br>• Features: Date Display & LED Backlight<br>• Movement: Automatic Battery Powered" 
-      },
-      9: { 
-        code: "BA-109", 
-        title: "Unisex Sleek Black Digital Watch", 
-        priceNum: 280, 
-        price: "₹280", 
-        img: "https://iili.io/CZFuQwl.md.jpg", 
-        desc: "• Display: Clear Digital Display Dial<br>• Strap: Premium Black Silicone Bracelet Strap<br>• Body: Lightweight Alloy Case<br>• Style: Minimalist Casual & Daily Fit" 
-      },
-      10: { 
-        code: "BA-110", 
-        title: "Men's Matte Black Analog Watch", 
-        priceNum: 295, 
-        price: "₹295", 
-        img: "https://iili.io/CZF5nyJ.md.jpg", 
-        desc: "• Movement: High-Precision Quartz Movement<br>• Dial Size: 35mm Round Dial<br>• Durability: Scratch-Resistant & Shock-Resistant<br>• Strap: Soft Silicone Strap with Buckle" 
-      },
-      11: { 
-        code: "BA-111", 
-        title: "Men's Classic Silver Steel Analog Watch", 
-        priceNum: 299, 
-        price: "₹299", 
-        img: "https://iili.io/CZFYosp.md.jpg", 
-        desc: "• Dial: 30mm Black Round Dial<br>• Chain: Stainless Steel Silver Chain Link<br>• Movement: Quartz Battery Powered<br>• Closure: Stainless Steel Fold Clasp" 
-      },
-      12: { 
-        code: "BA-112", 
-        title: "Men's Multi-Strand Black Leather Bracelet", 
-        priceNum: 199, 
-        price: "₹199", 
-        img: "https://iili.io/CZFjunt.md.jpg", 
-        desc: "• Material: Genuine Styled Black Leather & Alloy<br>• Sizing: Adjustable Slip-On Closure (Size 3)<br>• Weight: 75g Solid Build<br>• Occasion: Western Party & Casual Wear" 
-      }
+      1: { code: "BA-101", title: "Pina Colada Attar 6ml Pack of 2", priceNum: 299, price: "₹299", img: "https://i.ibb.co/4ZwFRcth/Screenshot-2026-0820-184205.jpg", desc: "• Pack: 2 Bottles (6ml each)<br>• Flavour: Strawberry & Pina Colada<br>• Type: Non-Alcoholic Unisex Attar" },
+      2: { code: "BA-102", title: "Classy Men Silver Plated Designer Bracelet", priceNum: 149, price: "₹149", img: "https://iili.io/CZ2bBII.md.jpg", desc: "• Material: Stainless Steel<br>• Color: Premium Silver<br>• Occasion: Daily Wear" },
+      3: { code: "BA-103", title: "Men's Designer Gold Plated Bracelet", priceNum: 299, price: "₹299", img: "https://iili.io/CZ3LxzF.md.jpg", desc: "• Material: Brass Base Metal<br>• Stone: Amethyst Stone<br>• Size: 2-12 (Non-Adjustable)" },
+      4: { code: "BA-104", title: "Men's Magnetic Chain Bracelet (2pc Set)", priceNum: 199, price: "₹199", img: "https://iili.io/CZ3ZhD7.md.jpg", desc: "• Material: Silver Plated Alloy<br>• Size: 2-10 (Adjustable)<br>• Closure: Hook Lock" },
+      5: { code: "BA-105", title: "Men's Silver Plated Charm Bracelet", priceNum: 299, price: "₹299", img: "https://iili.io/CZ3bCo7.md.jpg", desc: "• Material: Stainless Steel<br>• Length: 20cm<br>• Closure: Foldover Clasp" },
+      6: { code: "BA-106", title: "Men's Brass Gold Plated Kada Bracelet", priceNum: 249, price: "₹249", img: "https://iili.io/CZ3yzKX.md.jpg", desc: "• Material: Brass Base Metal<br>• Size: 2-12 (8-inch)<br>• Style: Solid Design" },
+      7: { code: "BA-107", title: "SIXER PRO Double Blade Cricket Bat", priceNum: 399, price: "₹399", img: "https://iili.io/CZF2scP.md.jpg", desc: "• Material: Hard Plastic<br>• Type: Tennis Ball Cricket" },
+      8: { code: "BA-108", title: "Men's Black Analog-Digital Sport Watch", priceNum: 249, price: "₹249", img: "https://iili.io/CZFC2Ul.md.jpg", desc: "• Style: Dual Analog-Digital<br>• Features: Date & LED Light<br>• Strap: Rubber" },
+      9: { code: "BA-109", title: "Unisex Sleek Black Digital Watch", priceNum: 280, price: "₹280", img: "https://iili.io/CZFuQwl.md.jpg", desc: "• Type: Digital Display<br>• Strap: Silicone Bracelet<br>• Style: Minimalist" },
+      10: { code: "BA-110", title: "Men's Matte Black Analog Watch", priceNum: 295, price: "₹295", img: "https://iili.io/CZF5nyJ.md.jpg", desc: "• Dial: 35mm Round Dial<br>• Durability: Shock-Resistant<br>• Strap: Soft Silicone" },
+      11: { code: "BA-111", title: "Men's Classic Silver Steel Analog Watch", priceNum: 299, price: "₹299", img: "https://iili.io/CZFYosp.md.jpg", desc: "• Dial: 30mm Black Dial<br>• Chain: Silver Steel Link<br>• Closure: Fold Clasp" },
+      12: { code: "BA-112", title: "Men's Multi-Strand Black Leather Bracelet", priceNum: 199, price: "₹199", img: "https://iili.io/CZFjunt.md.jpg", desc: "• Material: Leather & Alloy<br>• Size: Adjustable Slip-On" },
+      13: { code: "BA-113", title: "Crozon Premium Handkerchief (Pack of 6)", priceNum: 269, price: "₹269", img: "https://i.ibb.co/68v1r52/1000459580.jpg", desc: "• Material: 100% Cotton (Soft)<br>• Quantity: Pack of 6<br>• Size: 43cm x 43cm<br>• Pattern: Striped" },
+      14: { code: "BA-114", title: "Unisex Outdoor Tactical Bucket Hat", priceNum: 258, price: "₹258", img: "https://i.ibb.co/1Jq0d2y/1000459548.jpg", desc: "• Size: 56-58cm (Adjustable)<br>• Features: Air Eyelets, Windproof String<br>• Occasion: Summer Travel & Outdoor" }
     };
 
     function render() {
