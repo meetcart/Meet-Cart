@@ -95,7 +95,22 @@
     let selectedQuantity = 1;
     let currentId = null;
     const products = { 
-      1: { code: "BA-101", title: "Pina Colada Attar 6ml Pack of 2", priceNum: 299, price: "₹299", img: "https://i.ibb.co/4ZwFRcth/Screenshot-2026-0820-184205.jpg", desc: "• Pack: 2 Bottles (6ml each)<br>• Flavour: Strawberry & Pina Colada<br>• Type: Non-Alcoholic Unisex Attar<br>• Shelf Life: 36 Months" } 
+      1: { 
+        code: "BA-101", 
+        title: "Pina Colada Attar 6ml Pack of 2", 
+        priceNum: 299, 
+        price: "₹299", 
+        img: "https://i.ibb.co/4ZwFRcth/Screenshot-2026-0820-184205.jpg", 
+        desc: "• Pack: 2 Bottles (6ml each)<br>• Flavour: Strawberry & Pina Colada<br>• Type: Non-Alcoholic Unisex Attar<br>• Shelf Life: 36 Months" 
+      },
+      2: { 
+        code: "BA-102", 
+        title: "Classy Men Silver Plated Designer Bracelet", 
+        priceNum: 149, 
+        price: "₹149", 
+        img: "https://iili.io/CZ2bBII.md.jpg", 
+        desc: "• Material: High Quality Stainless Steel<br>• Color: Premium Silver<br>• Type: Designer Link Chain Bracelet<br>• Closure: Sturdy Hook Lock<br>• Occasion: Daily Wear & Casual Outings" 
+      }
     };
     function render() {
         const grid = document.getElementById('productGrid');
